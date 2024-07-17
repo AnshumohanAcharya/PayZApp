@@ -8,7 +8,6 @@ import cors from 'cors';
 
 dotenv.config();
 
-
 const app = express();
 
 const PORT = process.env.PORT || 8000;
@@ -16,6 +15,10 @@ const PORT = process.env.PORT || 8000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+app.get('/health', (req, res) => {
+    res.send('Server is running!');
+});
 
 
 app.use('/api/users', userRoutes);

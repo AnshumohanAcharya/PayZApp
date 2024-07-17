@@ -1,0 +1,117 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:211125395913:task-definition/payzapp-task:2",
+    "containerDefinitions": [
+        {
+            "name": "payzapp-container",
+            "image": "211125395913.dkr.ecr.us-east-1.amazonaws.com/payzapp-backend",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "payzapp-container-8000-tcp",
+                    "containerPort": 8000,
+                    "hostPort": 8000,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "MONGODB_URI",
+                    "value": "mongodb+srv://anshumohanacharya19:ClcL3ypyZlS6vCyc@paygate1.r17tej9.mongodb.net/?retryWrites=true&w=majority&appName=paygate1"
+                },
+                {
+                    "name": "STRIPE_SECRET_KEY",
+                    "value": "sk_test_51POHNnRt2X24lwgzRMCbrNftbwR9HMlgDfcudx6UpvMUf7w753XDobGL5pkgLxdpEKtA86sVntLbgHA3YDDnxZKm002I3duzJT"
+                },
+                {
+                    "name": "PORT",
+                    "value": "8000"
+                },
+                {
+                    "name": "JWT_SECRET",
+                    "value": "myjwtsecret"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/payzapp-task",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "healthCheck": {
+                "command": [
+                    "CMD-SHELL",
+                    "curl -f http://localhost:8000/health || exit 1"
+                ],
+                "interval": 30,
+                "timeout": 5,
+                "retries": 3
+            },
+            "systemControls": []
+        }
+    ],
+    "family": "payzapp-task",
+    "executionRoleArn": "arn:aws:iam::211125395913:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 2,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.24"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.container-health-check"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "3072",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2024-07-17T09:26:04.388Z",
+    "registeredBy": "arn:aws:iam::211125395913:root",
+    "tags": []
+}
